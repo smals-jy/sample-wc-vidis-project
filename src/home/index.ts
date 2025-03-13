@@ -20,7 +20,7 @@ container.className = "container";
 
 // Create logo
 const logo = document.createElement("img");
-logo.src = "https://play-lh.googleusercontent.com/6tKRItQiwMuPfunHUMOLlM12-QZR216951db8U5ork65yE_6wUC_-Ux8DaOLJdg-YA=w480-h960";
+logo.src = "/logo.png";
 logo.className = "logo";
 logo.alt = "App Logo";
 container.appendChild(logo);
