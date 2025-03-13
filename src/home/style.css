@@ -38,7 +38,7 @@ body::before {
 }
 
 /* Form container */
-.container {
+#app .container {
   background: rgba(255, 255, 255, 0.9);
   padding: 20px;
   border-radius: 10px;
@@ -50,7 +50,7 @@ body::before {
 }
 
 /* Logo */
-.logo {
+#app .logo {
   width: 80px;
   height: 80px;
   display: block;
@@ -58,14 +58,14 @@ body::before {
 }
 
 /* Labels */
-label {
+#app label {
   display: block;
   margin-top: 10px;
   font-weight: bold;
 }
 
 /* Dropdown styling */
-select {
+#app select {
   width: 100%;
   padding: 8px;
   margin-top: 5px;
@@ -74,7 +74,7 @@ select {
 }
 
 /* Button styling */
-button {
+#app button {
   width: 100%;
   padding: 10px;
   margin-top: 20px;
