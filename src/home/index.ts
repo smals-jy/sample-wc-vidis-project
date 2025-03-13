@@ -68,6 +68,7 @@ async function parseForm() {
   const component = (document.getElementById("component") as HTMLSelectElement).value as ComponentChoice;
   const language = (document.getElementById("language") as HTMLSelectElement).value as `${Language}`;
   const environment = (document.getElementById("environment") as HTMLSelectElement).value as `${Configuration}`;
+  let token = prompt("Your VIDIS JWT token here");
 
   // Common params to all components
   let commonParams : Parameters = {
@@ -79,7 +80,7 @@ async function parseForm() {
           set: () => {},
           remove: () => {}
       } ,
-      getAccessToken: async () => prompt("Your VIDIS JWT token here"),
+      getAccessToken: async () => token,
       registerRefreshCallback: () => { }
     }
   }
@@ -116,6 +117,7 @@ async function parseForm() {
     // Put the component here
     if (wc && componentContainer) {
       componentContainer.appendChild(wc);
+      document.getElementById('app')?.remove();
     }
 
   } catch (error) {
