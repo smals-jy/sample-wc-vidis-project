@@ -9,3 +9,8 @@ class PrescriptionList extends HTMLElement {
     configName: `${Configuration}`;
     services: ComponentServices;
 }
+
+export type Parameters = {
+    language: `${Language}`;
+    configName: `${Configuration}`;
+}

@@ -1,6 +1,14 @@
 import "./style.css";
+import type { Language, Configuration } from "@smals-belgium/myhealth-wc-integration";
+import type { Parameters } from "../@types/app.d.ts";
 
-const components = ["prescriptions", "medication-scheme", "diary-notes", "delivered-medication"];
+// Types
+type ComponentChoice = "prescriptions-list" | "prescriptions-detail" | "medication-scheme" | "diary-notes" | "delivered-medication-list" | "delivered-medication-detail";
+
+// variables
+const components : ComponentChoice[] = [
+  "prescriptions-list", "medication-scheme", "diary-notes", "delivered-medication-list", "delivered-medication-detail" 
+];
 const languages = ["fr", "nl", "en", "de"];
 const environments = ["ACC", "PROD"];
 
@@ -45,17 +53,33 @@ form.appendChild(goButton);
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const component = (document.getElementById("component") as HTMLSelectElement).value;
-  const language = (document.getElementById("language") as HTMLSelectElement).value;
-  const environment = (document.getElementById("environment") as HTMLSelectElement).value;
+  const component = (document.getElementById("component") as HTMLSelectElement).value as ComponentChoice;
+  const language = (document.getElementById("language") as HTMLSelectElement).value as `${Language}`;
+  const environment = (document.getElementById("environment") as HTMLSelectElement).value as `${Configuration}`;
 
-  console.log(`Loading ${component}-list with lang=${language} and env=${environment}`);
+  // Common params to all components
+  let commonParams : Parameters = {
+    configName: environment,
+    language: language
+  }
+
+  console.log(`Loading ${component}`);
+  console.log(commonParams);
 
   try {
     // Dynamically import the corresponding module
-    const module = await import(`../${component}-list/index.ts`);
-    if (module.init) {
-      module.init({ language, environment });
+    switch(component) {
+      case "prescriptions-list":
+        let module = (await import("../prescriptions-list/index.ts")).default;
+        await module(commonParams);
+        break;
+      case "prescriptions-detail":
+      case "medication-scheme":
+      case "diary-notes":
+      case "delivered-medication-list":
+      case "delivered-medication-detail":
+      default:
+        break
     }
   } catch (error) {
     console.error("Failed to load module:", error);
