@@ -14,19 +14,11 @@ export default async function initModule(params : Parameters) {
     // Refer to https://www.npmjs.com/package/@smals-belgium/myhealth-wc-integration for more details
     wc.language = params.language
     wc.configName = params.configName;
-    wc.services = {
-        cache: {
-            get: () => (undefined),
-            set: () => {},
-            remove: () => {}
-        } ,
-        getAccessToken: async () => prompt("Your token here"),
-        registerRefreshCallback: () => { }
-    }
+    wc.services = params.services;
 
     wc.addEventListener("onSelectPrescription", (event) => {
         console.log(`event:`, event);
     })
-
-    document.body.append(wc);
+    return wc;
+    //document.body.append(wc);
 }

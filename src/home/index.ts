@@ -41,18 +41,30 @@ const createDropdown = (label: string, options: string[], id: string) => {
   return div;
 };
 
-// Create form
-const form = document.createElement("form");
-form.appendChild(createDropdown("Component", components, "component"));
-form.appendChild(createDropdown("Language", languages, "language"));
-form.appendChild(createDropdown("Environment", environments, "environment"));
+// Generate the form for end users
+function generateForm() {
+  // Create form
+  const form = document.createElement("form");
+  form.appendChild(createDropdown("Component", components, "component"));
+  form.appendChild(createDropdown("Language", languages, "language"));
+  form.appendChild(createDropdown("Environment", environments, "environment"));
 
-const goButton = document.createElement("button");
-goButton.textContent = "Go";
-form.appendChild(goButton);
+  const goButton = document.createElement("button");
+  goButton.textContent = "Go";
+  form.appendChild(goButton);
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    await parseForm();
+  });
+
+  // Append elements
+  container.appendChild(form);
+  app.appendChild(container);
+}
+
+async function parseForm() {
+  // Fields
   const component = (document.getElementById("component") as HTMLSelectElement).value as ComponentChoice;
   const language = (document.getElementById("language") as HTMLSelectElement).value as `${Language}`;
   const environment = (document.getElementById("environment") as HTMLSelectElement).value as `${Configuration}`;
@@ -60,18 +72,37 @@ form.addEventListener("submit", async (event) => {
   // Common params to all components
   let commonParams : Parameters = {
     configName: environment,
-    language: language
+    language: language,
+    services: {
+      cache: {
+          get: () => (undefined),
+          set: () => {},
+          remove: () => {}
+      } ,
+      getAccessToken: async () => prompt("Your VIDIS JWT token here"),
+      registerRefreshCallback: () => { }
+    }
   }
 
   console.log(`Loading ${component}`);
   console.log(commonParams);
 
   try {
+    let wc : HTMLElement | null = null;
+    const componentContainer = document.getElementById("playground");
+
+    // Delete previous web component
+    if (componentContainer) {
+      while (componentContainer.firstChild) {
+        componentContainer.removeChild(componentContainer.firstChild);
+      }
+    }
+
     // Dynamically import the corresponding module
     switch(component) {
       case "prescriptions-list":
         let module = (await import("../prescriptions-list/index.ts")).default;
-        await module(commonParams);
+        wc = await module(commonParams);
         break;
       case "prescriptions-detail":
       case "medication-scheme":
@@ -81,11 +112,16 @@ form.addEventListener("submit", async (event) => {
       default:
         break
     }
+
+    // Put the component here
+    if (wc && componentContainer) {
+      componentContainer.appendChild(wc);
+    }
+
   } catch (error) {
     console.error("Failed to load module:", error);
   }
-});
+}
 
-// Append elements
-container.appendChild(form);
-app.appendChild(container);
+// Generate the form
+generateForm()
