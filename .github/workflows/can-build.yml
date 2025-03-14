@@ -1,0 +1,25 @@
+name: Can build
+
+on:
+  # Runs on pushes
+  push:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+      - name: ⚙️ Setup Pages
+        uses: actions/configure-pages@v5
+        id: configure
+      - name: 🛠️ Build
+        env:
+          GITHUB_ORIGIN: ${{ steps.configure.outputs.origin }}
+          GITHUB_BASE: ${{ steps.configure.outputs.base_path }}
+        run: |
+          yarn
+          yarn build
