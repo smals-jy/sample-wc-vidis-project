@@ -26,3 +26,5 @@ class PrescriptionDetails extends CommonSpecs {
 }
 
 class MedicationScheme extends CommonSpecs {}
+
+class DiaryNote extends CommonSpecs {}

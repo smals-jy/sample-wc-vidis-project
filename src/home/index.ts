@@ -167,6 +167,9 @@ async function parseForm() {
                 wc = await module(commonParams);
                 break;
             case "diary-notes":
+                module = (await import("../diary-notes/index.ts")).default;
+                wc = await module(commonParams);
+                break;
             case "delivered-medication-list":
             case "delivered-medication-detail":
             default:
