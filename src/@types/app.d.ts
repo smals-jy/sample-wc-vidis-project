@@ -24,3 +24,5 @@ export type Parameters = {
 class PrescriptionDetails extends CommonSpecs {
     rid: string;
 }
+
+class MedicationScheme extends CommonSpecs {}
