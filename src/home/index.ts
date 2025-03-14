@@ -60,6 +60,7 @@ function generateForm() {
     const extraParamsInput = document.createElement("textarea");
     extraParamsInput.id = "extraParams";
     extraParamsInput.value = "{}"; // Default value
+    extraParamsInput.style.width = "100%";
     extraParamsDiv.appendChild(extraParamsInput);
     form.appendChild(extraParamsDiv);
 
@@ -75,6 +76,25 @@ function generateForm() {
     // Append elements
     container.appendChild(form);
     app.appendChild(container);
+
+    // Add event listener to component dropdown
+    const componentSelect = document.getElementById("component") as HTMLSelectElement;
+    const extraParamsTextArea = document.getElementById("extraParams") as HTMLTextAreaElement;
+
+    componentSelect.addEventListener("change", () => {
+        const selectedComponent = componentSelect.value as ComponentChoice;
+        switch (selectedComponent) {
+            case "prescriptions-detail":
+                extraParamsTextArea.value = `{ "rid": "BEP000000000" }`;
+                break;
+            case "delivered-medication-detail":
+                extraParamsTextArea.value = `{ "dguid": "123" }`;
+                break;
+            default:
+                extraParamsTextArea.value = "{}";
+                break;
+        }
+    });
 }
 
 async function parseForm() {
