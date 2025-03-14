@@ -11,8 +11,8 @@ const components: ComponentChoice[] = [
     "prescriptions-detail",
     "medication-scheme",
     "diary-notes",
-    "delivered-medication-list",
-    "delivered-medication-detail"
+    "delivered-medication-list"
+    //"delivered-medication-detail"
 ];
 const languages = ["fr", "nl", "en", "de"];
 const environments = ["ACC", "PROD"];
@@ -155,26 +155,30 @@ async function parseForm() {
         // Dynamically import the corresponding module
         switch (component) {
             case "prescriptions-list":
-                module = (await import("../prescriptions-list/index.ts")).default;
+                module = (await import("../prescriptions-list")).default;
                 wc = await module(commonParams);
                 break;
             case "prescriptions-detail":
-                module = (await import("../prescription-detail/index.ts")).default;
+                module = (await import("../prescription-detail")).default;
                 wc = await module(commonParams);
                 break;
             case "medication-scheme":
-                module = (await import("../medication-scheme/index.ts")).default;
+                module = (await import("../medication-scheme")).default;
                 wc = await module(commonParams);
                 break;
             case "diary-notes":
-                module = (await import("../diary-notes/index.ts")).default;
+                module = (await import("../diary-notes")).default;
                 wc = await module(commonParams);
                 break;
             case "delivered-medication-list":
                 module = (await import("../delivered-medication-list")).default;
                 wc = await module(commonParams);
                 break;
-            case "delivered-medication-detail":
+            // TODO renable it when package issue is solved
+            //case "delivered-medication-detail":
+            //    module = (await import("../delivered-medication-detail")).default;
+            //    wc = await module(commonParams);
+            //    break;
             default:
                 break;
         }

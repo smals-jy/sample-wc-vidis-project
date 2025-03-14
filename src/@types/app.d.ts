@@ -30,3 +30,7 @@ class MedicationScheme extends CommonSpecs {}
 class DiaryNote extends CommonSpecs {}
 
 class DeliveredMedicationList extends CommonSpecs {}
+
+class DeliveredMedicationDetail extends CommonSpecs {
+    dguid: string;
+}
