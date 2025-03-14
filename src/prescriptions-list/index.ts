@@ -20,5 +20,4 @@ export default async function initModule(params : Parameters) {
         console.log(`event:`, event);
     })
     return wc;
-    //document.body.append(wc);
 }

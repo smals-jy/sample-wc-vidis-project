@@ -1,13 +1,18 @@
 import "./style.css";
 import type { Language, Configuration } from "@smals-belgium/myhealth-wc-integration";
-import type { Parameters } from "../@types/app.d.ts";
+import type { Parameters, CommonSpecs } from "../@types/app.d.ts";
 
 // Types
 type ComponentChoice = "prescriptions-list" | "prescriptions-detail" | "medication-scheme" | "diary-notes" | "delivered-medication-list" | "delivered-medication-detail";
 
 // variables
 const components: ComponentChoice[] = [
-    "prescriptions-list", "medication-scheme", "diary-notes", "delivered-medication-list", "delivered-medication-detail"
+    "prescriptions-list",
+    "prescriptions-detail",
+    "medication-scheme",
+    "diary-notes",
+    "delivered-medication-list",
+    "delivered-medication-detail"
 ];
 const languages = ["fr", "nl", "en", "de"];
 const environments = ["ACC", "PROD"];
@@ -117,6 +122,7 @@ async function parseForm() {
 
     try {
         let wc: HTMLElement | null = null;
+        let module : (params: Parameters) => Promise<CommonSpecs>;
         const componentContainer = document.getElementById("playground");
 
         // Delete previous web component
@@ -129,10 +135,13 @@ async function parseForm() {
         // Dynamically import the corresponding module
         switch (component) {
             case "prescriptions-list":
-                let module = (await import("../prescriptions-list/index.ts")).default;
+                module = (await import("../prescriptions-list/index.ts")).default;
                 wc = await module(commonParams);
                 break;
             case "prescriptions-detail":
+                module = (await import("../prescription-detail/index.ts")).default;
+                wc = await module(commonParams);
+                break;
             case "medication-scheme":
             case "diary-notes":
             case "delivered-medication-list":

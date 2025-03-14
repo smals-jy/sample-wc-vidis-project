@@ -4,11 +4,13 @@ import type {
     ComponentServices
 } from "@smals-belgium/myhealth-wc-integration";
 
-class PrescriptionList extends HTMLElement {
+class CommonSpecs extends HTMLElement {
     language: `${Language}`;
     configName: `${Configuration}`;
     services: ComponentServices;
 }
+
+class PrescriptionList extends CommonSpecs {}
 
 export type Parameters = {
     language: `${Language}`;
@@ -17,4 +19,8 @@ export type Parameters = {
     extraParams: {
         [x:string]: any
     }
+}
+
+class PrescriptionDetails extends CommonSpecs {
+    rid: string;
 }
