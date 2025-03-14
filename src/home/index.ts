@@ -171,6 +171,9 @@ async function parseForm() {
                 wc = await module(commonParams);
                 break;
             case "delivered-medication-list":
+                module = (await import("../delivered-medication-list")).default;
+                wc = await module(commonParams);
+                break;
             case "delivered-medication-detail":
             default:
                 break;
