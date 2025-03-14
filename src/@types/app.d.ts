@@ -14,4 +14,7 @@ export type Parameters = {
     language: `${Language}`;
     configName: `${Configuration}`;
     services: ComponentServices;
+    extraParams: {
+        [x:string]: any
+    }
 }

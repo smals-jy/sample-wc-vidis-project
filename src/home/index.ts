@@ -6,8 +6,8 @@ import type { Parameters } from "../@types/app.d.ts";
 type ComponentChoice = "prescriptions-list" | "prescriptions-detail" | "medication-scheme" | "diary-notes" | "delivered-medication-list" | "delivered-medication-detail";
 
 // variables
-const components : ComponentChoice[] = [
-  "prescriptions-list", "medication-scheme", "diary-notes", "delivered-medication-list", "delivered-medication-detail" 
+const components: ComponentChoice[] = [
+    "prescriptions-list", "medication-scheme", "diary-notes", "delivered-medication-list", "delivered-medication-detail"
 ];
 const languages = ["fr", "nl", "en", "de"];
 const environments = ["ACC", "PROD"];
@@ -27,103 +27,130 @@ container.appendChild(logo);
 
 // Function to create dropdowns
 const createDropdown = (label: string, options: string[], id: string) => {
-  const div = document.createElement("div");
-  div.innerHTML = `<label for="${id}">${label}:</label>`;
-  const select = document.createElement("select");
-  select.id = id;
-  options.forEach(option => {
-    const opt = document.createElement("option");
-    opt.value = option;
-    opt.textContent = option;
-    select.appendChild(opt);
-  });
-  div.appendChild(select);
-  return div;
+    const div = document.createElement("div");
+    div.innerHTML = `<label for="${id}">${label}:</label>`;
+    const select = document.createElement("select");
+    select.id = id;
+    options.forEach(option => {
+        const opt = document.createElement("option");
+        opt.value = option;
+        opt.textContent = option;
+        select.appendChild(opt);
+    });
+    div.appendChild(select);
+    return div;
 };
 
 // Generate the form for end users
 function generateForm() {
-  // Create form
-  const form = document.createElement("form");
-  form.appendChild(createDropdown("Component", components, "component"));
-  form.appendChild(createDropdown("Language", languages, "language"));
-  form.appendChild(createDropdown("Environment", environments, "environment"));
+    // Create form
+    const form = document.createElement("form");
+    form.appendChild(createDropdown("Component", components, "component"));
+    form.appendChild(createDropdown("Language", languages, "language"));
+    form.appendChild(createDropdown("Environment", environments, "environment"));
 
-  const goButton = document.createElement("button");
-  goButton.textContent = "Go";
-  form.appendChild(goButton);
+    // Add input for extra parameters
+    const extraParamsDiv = document.createElement("div");
+    extraParamsDiv.innerHTML = `<label for="extraParams">Extra Parameters (JS Object):</label>`;
+    const extraParamsInput = document.createElement("textarea");
+    extraParamsInput.id = "extraParams";
+    extraParamsInput.value = "{}"; // Default value
+    extraParamsDiv.appendChild(extraParamsInput);
+    form.appendChild(extraParamsDiv);
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    await parseForm();
-  });
+    const goButton = document.createElement("button");
+    goButton.textContent = "Go";
+    form.appendChild(goButton);
 
-  // Append elements
-  container.appendChild(form);
-  app.appendChild(container);
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        await parseForm();
+    });
+
+    // Append elements
+    container.appendChild(form);
+    app.appendChild(container);
 }
 
 async function parseForm() {
-  // Fields
-  const component = (document.getElementById("component") as HTMLSelectElement).value as ComponentChoice;
-  const language = (document.getElementById("language") as HTMLSelectElement).value as `${Language}`;
-  const environment = (document.getElementById("environment") as HTMLSelectElement).value as `${Configuration}`;
-  let token = prompt("Your VIDIS JWT token here");
+    // Fields
+    const component = (document.getElementById("component") as HTMLSelectElement).value as ComponentChoice;
+    const language = (document.getElementById("language") as HTMLSelectElement).value as `${Language}`;
+    const environment = (document.getElementById("environment") as HTMLSelectElement).value as `${Configuration}`;
+    let token = prompt("Your VIDIS JWT token here");
+    let extraParamsString = (document.getElementById("extraParams") as HTMLTextAreaElement).value;
 
-  // Common params to all components
-  let commonParams : Parameters = {
-    configName: environment,
-    language: language,
-    services: {
-      cache: {
-          get: () => (undefined),
-          set: () => {},
-          remove: () => {}
-      } ,
-      getAccessToken: async () => token,
-      registerRefreshCallback: () => { }
-    }
-  }
-
-  console.log(`Loading ${component}`);
-  console.log(commonParams);
-
-  try {
-    let wc : HTMLElement | null = null;
-    const componentContainer = document.getElementById("playground");
-
-    // Delete previous web component
-    if (componentContainer) {
-      while (componentContainer.firstChild) {
-        componentContainer.removeChild(componentContainer.firstChild);
-      }
+    // Parse extra parameters (with security considerations)
+    let extraParams: any = {};
+    try {
+        // Use a restricted sandbox-like approach.
+        extraParams = (new Function(`"use strict"; return (${extraParamsString})`))();
+        if (typeof extraParams !== 'object' || extraParams === null) {
+            extraParams = {}; // Reset if not an object.
+            console.warn("Extra parameters were not a valid object. Reset to empty object.");
+        }
+    } catch (error) {
+        console.error("Error parsing extra parameters:", error);
+        alert("Invalid extra parameters. Please enter a valid JavaScript object.");
+        extraParams = {}; // Reset on error
     }
 
-    // Dynamically import the corresponding module
-    switch(component) {
-      case "prescriptions-list":
-        let module = (await import("../prescriptions-list/index.ts")).default;
-        wc = await module(commonParams);
-        break;
-      case "prescriptions-detail":
-      case "medication-scheme":
-      case "diary-notes":
-      case "delivered-medication-list":
-      case "delivered-medication-detail":
-      default:
-        break
-    }
+    // Common params to all components
+    let commonParams: Parameters = {
+        configName: environment,
+        language: language,
+        services: {
+            cache: {
+                get: () => (undefined),
+                set: () => { },
+                remove: () => { }
+            },
+            getAccessToken: async () => token,
+            registerRefreshCallback: () => { }
+        },
+        // Merge extra parameters
+        extraParams: extraParams
+    };
 
-    // Put the component here
-    if (wc && componentContainer) {
-      componentContainer.appendChild(wc);
-      document.getElementById('app')?.remove();
-    }
+    console.log(`Loading ${component}`);
+    console.log(commonParams);
 
-  } catch (error) {
-    console.error("Failed to load module:", error);
-  }
+    try {
+        let wc: HTMLElement | null = null;
+        const componentContainer = document.getElementById("playground");
+
+        // Delete previous web component
+        if (componentContainer) {
+            while (componentContainer.firstChild) {
+                componentContainer.removeChild(componentContainer.firstChild);
+            }
+        }
+
+        // Dynamically import the corresponding module
+        switch (component) {
+            case "prescriptions-list":
+                let module = (await import("../prescriptions-list/index.ts")).default;
+                wc = await module(commonParams);
+                break;
+            case "prescriptions-detail":
+            case "medication-scheme":
+            case "diary-notes":
+            case "delivered-medication-list":
+            case "delivered-medication-detail":
+            default:
+                break;
+        }
+
+        // Put the component here
+        if (wc && componentContainer) {
+            componentContainer.appendChild(wc);
+            document.getElementById('app')?.remove();
+        }
+
+    } catch (error) {
+        console.error("Failed to load module:", error);
+    }
 }
 
 // Generate the form
-generateForm()
+generateForm();
