@@ -25,7 +25,7 @@ container.className = "container";
 
 // Create logo
 const logo = document.createElement("img");
-logo.src = "https://smals-jy.github.io/sample-wc-vidis-project/logo.png";
+logo.src = "/logo.png";
 logo.className = "logo";
 logo.alt = "App Logo";
 container.appendChild(logo);
