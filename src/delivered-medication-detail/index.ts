@@ -1,6 +1,5 @@
 // Import JS
-// TODO renable it when ok again
-// import "@smals-belgium-shared/vidis-delivered-medication-detail"
+import "@smals-belgium-shared/vidis-delivered-medication-detail"
 // Import CSS
 import "@smals-belgium-shared/vidis-delivered-medication-detail/delivered-medication-detail.css"
 // TODO will be removed when VIDIS packages have built-in types (needed so I can review MAGS criteria)
