@@ -174,11 +174,10 @@ async function parseForm() {
                 module = (await import("../delivered-medication-list")).default;
                 wc = await module(commonParams);
                 break;
-            // TODO renable it when package issue is solved
-            //case "delivered-medication-detail":
-            //    module = (await import("../delivered-medication-detail")).default;
-            //    wc = await module(commonParams);
-            //    break;
+            case "delivered-medication-detail":
+                module = (await import("../delivered-medication-detail")).default;
+                wc = await module(commonParams);
+                break;
             default:
                 break;
         }
