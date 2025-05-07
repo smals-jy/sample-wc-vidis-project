@@ -90,6 +90,9 @@ function generateForm() {
             case "delivered-medication-detail":
                 extraParamsTextArea.value = `{ "dguid": "123" }`;
                 break;
+            case "medication-scheme-detail":
+                extraParamsTextArea.value = `{}`;
+                break;
             default:
                 extraParamsTextArea.value = "{}";
                 break;
