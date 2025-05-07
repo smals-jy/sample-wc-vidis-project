@@ -3,13 +3,12 @@ import type { Language, Configuration } from "@smals-belgium/myhealth-wc-integra
 import type { Parameters, CommonSpecs } from "../@types/app.d.ts";
 
 // Types
-type ComponentChoice = "prescriptions-list" | "prescriptions-detail" | "medication-scheme" | "diary-notes" | "delivered-medication-list" | "delivered-medication-detail";
+type ComponentChoice = "prescriptions-list" | "prescriptions-detail" | "medication-scheme-list" | "medication-scheme-detail" | "diary-notes" | "delivered-medication-list" | "delivered-medication-detail";
 
 // variables
 const components: ComponentChoice[] = [
     "prescriptions-list",
     "prescriptions-detail",
-    "medication-scheme",
     "diary-notes",
     "delivered-medication-list",
     "delivered-medication-detail"
@@ -162,10 +161,10 @@ async function parseForm() {
                 module = (await import("../prescription-detail")).default;
                 wc = await module(commonParams);
                 break;
-            case "medication-scheme":
-                module = (await import("../medication-scheme")).default;
-                wc = await module(commonParams);
-                break;
+            //case "medication-scheme":
+            //    module = (await import("../medication-scheme")).default;
+            //    wc = await module(commonParams);
+            //    break;
             case "diary-notes":
                 module = (await import("../diary-notes")).default;
                 wc = await module(commonParams);
