@@ -105,7 +105,7 @@ async function parseForm() {
     const component = (document.getElementById("component") as HTMLSelectElement).value as ComponentChoice;
     const language = (document.getElementById("language") as HTMLSelectElement).value as `${Language}`;
     const environment = (document.getElementById("environment") as HTMLSelectElement).value as `${Configuration}`;
-    let token = environment !== "dev" 
+    let token = environment.toUpperCase() !== "DEV" 
         ? prompt("Your VIDIS JWT token here")
         : "xxx.yyy.zzz";
     let extraParamsString = (document.getElementById("extraParams") as HTMLTextAreaElement).value;
