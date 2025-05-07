@@ -1,3 +1,4 @@
+/*
 // Import JS
 import "@smals-belgium-shared/vidis-medication-scheme"
 // Import CSS
@@ -18,3 +19,4 @@ export default async function initModule(params : Parameters) {
 
     return wc;
 }
+*/
