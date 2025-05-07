@@ -25,7 +25,9 @@ class PrescriptionDetails extends CommonSpecs {
     rid: string;
 }
 
-class MedicationScheme extends CommonSpecs {}
+class MedicationSchemeList extends CommonSpecs {}
+
+class MedicationSchemeDetail extends CommonSpecs {}
 
 class DiaryNote extends CommonSpecs {}
 
