@@ -10,6 +10,7 @@ const components: ComponentChoice[] = [
     "prescriptions-list",
     "prescriptions-detail",
     "medication-scheme-list",
+    "medication-scheme-detail",
     "diary-notes",
     "delivered-medication-list",
     "delivered-medication-detail"
@@ -167,6 +168,10 @@ async function parseForm() {
                 break;
             case "medication-scheme-list":
                 module = (await import("../medication-scheme-list")).default;
+                wc = await module(commonParams);
+                break;
+            case "medication-scheme-detail":
+                module = (await import("../medication-scheme-detail")).default;
                 wc = await module(commonParams);
                 break;
             case "diary-notes":
