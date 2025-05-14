@@ -134,9 +134,7 @@ async function parseForm() {
                 set: () => { },
                 remove: () => { }
             },
-            getAccessToken: (token) 
-                ? async () => token 
-                : undefined,
+            getAccessToken: async () => token || null,
             registerRefreshCallback: () => { }
         },
         // Merge extra parameters
