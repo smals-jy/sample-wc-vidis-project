@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@smals-belgium/myhealth-wc-integration": "^2.0.0",
+    "@smals-belgium/myhealth-wc-integration": "^3.0.0",
     "typescript": "~5.8.3",
     "vite": "^6.3.5"
   },
