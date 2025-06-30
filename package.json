@@ -11,7 +11,7 @@
   "devDependencies": {
     "@smals-belgium/myhealth-wc-integration": "^3.0.0",
     "typescript": "~5.8.3",
-    "vite": "^6.3.5"
+    "vite": "^7.0.0"
   },
   "dependencies": {
     "@smals-belgium-shared/vidis-delivered-medication-detail": "^2.0.0",
