@@ -18,6 +18,7 @@ export default async function initModule(params : Parameters) {
     wc.professional = false;
     wc.offlineDataStorageEnabled = false;
     wc.isOfflineAuthenticated = false;
+    wc.ssin = undefined;
 
     wc.addEventListener("onSelectPrescription", (event) => {
         console.log(`event:`, event);
