@@ -65,3 +65,5 @@ export function createNpmVersionsFooter(): HTMLElement {
 export default function Footer() {
    document.body.appendChild(createNpmVersionsFooter()); 
 }
+
+Footer();
