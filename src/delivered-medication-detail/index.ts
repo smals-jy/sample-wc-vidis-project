@@ -18,6 +18,7 @@ export default async function initModule(params : Parameters) {
     wc.professional = false;
     wc.offlineDataStorageEnabled = false;
     wc.isOfflineAuthenticated = false;
+    wc.ssin = undefined;
 
     // Specific input for this common
     // Here is a dummy place holder dguid, to check what happens when delivered medication doesn't exist anymore
