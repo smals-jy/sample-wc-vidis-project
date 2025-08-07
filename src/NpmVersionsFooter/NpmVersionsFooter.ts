@@ -28,7 +28,7 @@ const contentStyle = `
   padding-top: 0.75em;
 `;
 
-export default function createNpmVersionsFooter(): HTMLElement {
+export function createNpmVersionsFooter(): HTMLElement {
   const footer = document.createElement("footer");
   footer.setAttribute("style", footerBase);
 
@@ -62,6 +62,6 @@ export default function createNpmVersionsFooter(): HTMLElement {
   return footer;
 }
 
-// Usage in your main.ts entry point:
-// import { createNpmVersionsFooter } from './NpmVersionsFooter/NpmVersionsFooter';
-// document.body.appendChild(createNpmVersionsFooter());
+export default function Footer() {
+   document.body.appendChild(createNpmVersionsFooter()); 
+}
