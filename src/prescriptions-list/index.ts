@@ -15,6 +15,9 @@ export default async function initModule(params : Parameters) {
     wc.language = params.language
     wc.configName = params.configName;
     wc.services = params.services;
+    wc.professional = false;
+    wc.offlineDataStorageEnabled = false;
+    wc.isOfflineAuthenticated = false;
 
     wc.addEventListener("onSelectPrescription", (event) => {
         console.log(`event:`, event);
