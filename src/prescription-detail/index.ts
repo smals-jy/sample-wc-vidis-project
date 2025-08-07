@@ -15,6 +15,9 @@ export default async function initModule(params : Parameters) {
     wc.language = params.language
     wc.configName = params.configName;
     wc.services = params.services;
+    wc.professional = false;
+    wc.offlineDataStorageEnabled = false;
+    wc.isOfflineAuthenticated = false;
 
     // Specific input for this common
     // Here is a dummy place holder rid, to check what happens when prescription doesn't exist anymore
