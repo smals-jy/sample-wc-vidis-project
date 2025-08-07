@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "generate:npm-versions": "npx tsx src/components/NpmVersionsFooter/extract-versions.ts",
+    "generate:npm-versions": "npx tsx src/NpmVersionsFooter/extract-versions.ts",
     "prebuild": "npm run generate:npm-versions",
     "build": "tsc && vite build",
     "preview": "vite preview"
