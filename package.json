@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "generate:npm-versions": "ts-node src/components/NpmVersionsFooter/extract-versions.ts",
+    "generate:npm-versions": "npx tsx src/components/NpmVersionsFooter/extract-versions.ts",
     "prebuild": "npm run generate:npm-versions",
     "build": "tsc && vite build",
     "preview": "vite preview"
@@ -13,7 +13,8 @@
   "devDependencies": {
     "@smals-belgium/myhealth-wc-integration": "^4.0.0",
     "typescript": "~5.9.2",
-    "vite": "^7.0.6"
+    "vite": "^7.0.6",
+    "tsx": "^4.20.3"
   },
   "dependencies": {
     "@smals-belgium-shared/vidis-delivered-medication-detail": "^3.0.0",
