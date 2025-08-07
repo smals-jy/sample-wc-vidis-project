@@ -8,6 +8,9 @@ class CommonSpecs extends HTMLElement {
     language: `${Language}`;
     configName: `${Configuration}`;
     services: ComponentServices;
+    professional: boolean;
+    offlineDataStorageEnabled: boolean;
+    isOfflineAuthenticated: boolean;
 }
 
 class PrescriptionList extends CommonSpecs {}
