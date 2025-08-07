@@ -18,6 +18,7 @@ export default async function initModule(params : Parameters) {
     wc.professional = false;
     wc.offlineDataStorageEnabled = false;
     wc.isOfflineAuthenticated = false;
+    wc.ssin = "12987654321";
 
     // Specific input for this common
     // Here is a dummy place holder rid, to check what happens when prescription doesn't exist anymore
