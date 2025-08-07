@@ -14,12 +14,12 @@
     "vite": "^7.0.6"
   },
   "dependencies": {
-    "@smals-belgium-shared/vidis-delivered-medication-detail": "snapshot",
-    "@smals-belgium-shared/vidis-delivered-medication-list": "snapshot",
-    "@smals-belgium-shared/vidis-diarynote": "snapshot",
-    "@smals-belgium-shared/vidis-medication-scheme-detail": "snapshot",
-    "@smals-belgium-shared/vidis-medication-scheme-list": "snapshot",
-    "@smals-belgium-shared/vidis-prescription-detail": "snapshot",
-    "@smals-belgium-shared/vidis-prescription-list": "snapshot"
+    "@smals-belgium-shared/vidis-delivered-medication-detail": "^3.0.0",
+    "@smals-belgium-shared/vidis-delivered-medication-list": "^3.0.0",
+    "@smals-belgium-shared/vidis-diarynote": "^3.0.0",
+    "@smals-belgium-shared/vidis-medication-scheme-detail": "^3.0.0",
+    "@smals-belgium-shared/vidis-medication-scheme-list": "^3.0.0",
+    "@smals-belgium-shared/vidis-prescription-detail": "^3.0.0",
+    "@smals-belgium-shared/vidis-prescription-list": "^3.0.0"
   }
 }
