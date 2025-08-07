@@ -11,6 +11,7 @@ class CommonSpecs extends HTMLElement {
     professional: boolean;
     offlineDataStorageEnabled: boolean;
     isOfflineAuthenticated: boolean;
+    ssin?: string;
 }
 
 class PrescriptionList extends CommonSpecs {}
