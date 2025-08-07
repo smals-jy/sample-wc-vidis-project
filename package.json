@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "generate:npm-versions": "ts-node src/components/NpmVersionsFooter/extract-versions.ts",
+    "prebuild": "npm run generate:npm-versions",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
