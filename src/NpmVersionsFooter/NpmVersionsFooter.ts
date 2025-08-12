@@ -11,9 +11,6 @@ const footerBase = `
   overflow: hidden;
   max-height: 2.4em;
 `;
-const footerExpanded = `
-  max-height: 200px;
-`;
 
 const toggleBtnStyle = `
   cursor: pointer;
@@ -55,7 +52,7 @@ export function createNpmVersionsFooter(): HTMLElement {
     contentDiv.style.display = open ? "block" : "none";
     footer.setAttribute(
       "style",
-      footerBase + (open ? footerExpanded : "")
+      footerBase
     );
   };
 
