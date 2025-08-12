@@ -9,6 +9,9 @@ const footerBase = `
   font-size: 0.9rem;
   transition: max-height 0.3s;
   overflow: hidden;
+`;
+
+const footerClosed = `
   max-height: 2.4em;
 `;
 
@@ -56,7 +59,7 @@ export function createNpmVersionsFooter(): HTMLElement {
     contentDiv.style.display = open ? "block" : "none";
     footer.setAttribute(
       "style",
-      footerBase + (open ? footerExpanded : "")
+      footerBase + (open ? footerExpanded : footerClosed)
     );
   };
 
