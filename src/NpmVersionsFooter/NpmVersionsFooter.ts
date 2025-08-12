@@ -12,6 +12,10 @@ const footerBase = `
   max-height: 2.4em;
 `;
 
+const footerExpanded = `
+  max-height: 20vh;
+`;
+
 const toggleBtnStyle = `
   cursor: pointer;
   background: none;
@@ -52,7 +56,7 @@ export function createNpmVersionsFooter(): HTMLElement {
     contentDiv.style.display = open ? "block" : "none";
     footer.setAttribute(
       "style",
-      footerBase
+      footerBase + (open ? footerExpanded : "")
     );
   };
 
