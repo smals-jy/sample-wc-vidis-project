@@ -15,7 +15,7 @@
     "typescript": "~5.9.2",
     "vite": "^7.1.1",
     "tsx": "^4.20.4",
-    "@types/node": "^24.2.1"
+    "@types/node": "^24.3.0"
   },
   "dependencies": {
     "@smals-belgium-shared/vidis-delivered-medication-detail": "^3.0.0",
