@@ -7,3 +7,7 @@ Playground to test VIDIS web components
 ## License
 
 Check [License](./LICENSE) file
+
+## Disclaimer
+
+This project is a POC (proof of concept). We do not offer any support for this project.
