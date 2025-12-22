@@ -23,7 +23,7 @@
     "@smals-belgium-shared/vidis-diarynote": "^3.3.2",
     "@smals-belgium-shared/vidis-medication-scheme-detail": "^3.3.2",
     "@smals-belgium-shared/vidis-medication-scheme-list": "^3.3.2",
-    "@smals-belgium-shared/vidis-prescription-detail": "^3.3.2",
+    "@smals-belgium-shared/vidis-prescription-detail": "^3.4.3",
     "@smals-belgium-shared/vidis-prescription-list": "^3.3.2"
   }
 }
