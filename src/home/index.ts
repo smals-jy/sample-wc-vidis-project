@@ -1,5 +1,6 @@
 import "./style.css";
-import type { Language, Configuration } from "@smals-belgium/myhealth-wc-integration";
+import { accessToken, idToken } from "@smals-belgium/myhealth-wc-integration";
+import type { UserLanguage, ConfigName } from "@smals-belgium/myhealth-wc-integration";
 import type { Parameters, CommonSpecs } from "../@types/app.d.ts";
 
 // Types
@@ -104,8 +105,8 @@ function generateForm() {
 async function parseForm() {
     // Fields
     const component = (document.getElementById("component") as HTMLSelectElement).value as ComponentChoice;
-    const language = (document.getElementById("language") as HTMLSelectElement).value as `${Language}`;
-    const environment = (document.getElementById("environment") as HTMLSelectElement).value as `${Configuration}`;
+    const language = (document.getElementById("language") as HTMLSelectElement).value as `${UserLanguage}`;
+    const environment = (document.getElementById("environment") as HTMLSelectElement).value as `${ConfigName}`;
     let token = prompt("Your VIDIS JWT token here");
     let extraParamsString = (document.getElementById("extraParams") as HTMLTextAreaElement).value;
 
@@ -129,13 +130,19 @@ async function parseForm() {
         configName: environment,
         language: language,
         services: {
-            cacheDataStorage: {
-                get: () => (undefined),
-                set: () => { },
-                remove: () => { }
+            cacheDataStorage: new Map<string, unknown>(),
+            offlineDataStorage: {
+                get: async () => null,
+                set: async () => { },
+                delete: async () => { }
             },
-            getAccessToken: async () => token || null,
-            registerRefreshCallback: () => { }
+            events: {
+                addEventListener: () => { },
+                removeEventListener: () => { }
+            },
+            getAccessToken: async () => accessToken(token || ""),
+            getIdToken: async () => idToken(token || ""),
+            patchContactInfo: () => []
         },
         // Merge extra parameters
         extraParams: extraParams
