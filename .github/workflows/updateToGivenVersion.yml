@@ -1,0 +1,68 @@
+name: Update Vidis Dependencies
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Target version (e.g., 3.5.3-snapshot.4)'
+        required: true
+        default: '3.5.3-snapshot.4'
+        type: string
+
+jobs:
+  update_vidis:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js ✨
+        uses: actions/setup-node@v6.3.0
+        with:
+          node-version: "lts/*"
+
+      - name: 🤖 Update @smals-belgium-shared/vidis packages
+        run: |
+          # 1. Identify all installed vidis packages from package.json
+          # Uses grep to find keys starting with the scope and prefix
+          PACKAGES=$(grep -o "@smals-belgium-shared/vidis-[^'\"]*" package.json | sort -u)
+
+          if [ -z "$PACKAGES" ]; then
+            echo "No matching @smals-belgium-shared/vidis-* packages found in package.json."
+            exit 0
+          fi
+
+          # 2. Construct the install command with the arbitrary version
+          INSTALL_LIST=""
+          for PKG in $PACKAGES; do
+            INSTALL_LIST="$INSTALL_LIST $PKG@${{ github.event.inputs.version }}"
+          done
+
+          echo "Updating the following packages: $INSTALL_LIST"
+          
+          # 3. Run npm install to update package.json and package-lock.json
+          npm install $INSTALL_LIST
+
+      - name: Build website 🤖
+        run: |
+          npm run build --if-present
+
+      - name: Create Pull Request 🤖
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update-vidis-deps
+          delete-branch: true
+          title: "chore: update vidis dependencies to ${{ github.event.inputs.version }}"
+          commit-message: "chore: bump @smals-belgium-shared/vidis-* to ${{ github.event.inputs.version }}"
+          body: |
+            ## Description
+            Automated update of `@smals-belgium-shared/vidis-*` dependencies.
+            
+            **Target Version:** `${{ github.event.inputs.version }}`
+            
+            This PR was triggered via `workflow_dispatch`.
