@@ -15,9 +15,16 @@ const __dirname = path.dirname(__filename);
 const lockPath = path.resolve(__dirname, "../../package-lock.json");
 const outPath = path.resolve(__dirname, "versions.json");
 
+// Safety check: Ensure package-lock.json exists
+if (!fs.existsSync(lockPath)) {
+  console.error(`Warning: 'package-lock.json' not found at ${lockPath}`);
+  process.exit(0);
+}
+
 const lock = JSON.parse(
   fs.readFileSync(lockPath, "utf-8")
 ) as { packages: Packages };
+
 const packages: Packages = lock.packages || {};
 
 const allowedPrefixes = [
@@ -40,3 +47,4 @@ for (const [pkg, meta] of Object.entries(packages)) {
 }
 
 fs.writeFileSync(outPath, JSON.stringify(result, null, 2));
+console.log(`Successfully generated ${outPath}`);
