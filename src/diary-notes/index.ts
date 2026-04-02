@@ -1,7 +1,7 @@
 // Import JS
 import "@smals-belgium-shared/vidis-diarynote"
 // Import CSS
-import "@smals-belgium-shared/vidis-diarynote/diarynote.css"
+// import "@smals-belgium-shared/vidis-diarynote/diarynote.css"
 // TODO will be removed when VIDIS packages have built-in types (needed so I can review MAGS criteria)
 import type { DiaryNote, Parameters } from "../@types/app";
 
