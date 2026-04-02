@@ -1,13 +1,13 @@
 import type {
-    Language,
-    Configuration,
-    ComponentServices
+    UserLanguage,
+    ConfigName,
+    HostServices
 } from "@smals-belgium/myhealth-wc-integration";
 
 class CommonSpecs extends HTMLElement {
-    language: `${Language}`;
-    configName: `${Configuration}`;
-    services: ComponentServices;
+    language: `${UserLanguage}`;
+    configName: `${ConfigName}`;
+    services: HostServices;
     professional: boolean;
     offlineDataStorageEnabled: boolean;
     isOfflineAuthenticated: boolean;
@@ -17,9 +17,9 @@ class CommonSpecs extends HTMLElement {
 class PrescriptionList extends CommonSpecs {}
 
 export type Parameters = {
-    language: `${Language}`;
-    configName: `${Configuration}`;
-    services: ComponentServices;
+    language: `${UserLanguage}`;
+    configName: `${ConfigName}`;
+    services: HostServices;
     extraParams: {
         [x:string]: any
     }

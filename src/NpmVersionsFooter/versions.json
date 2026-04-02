@@ -6,5 +6,5 @@
   "@smals-belgium-shared/vidis-medication-scheme-list": "3.5.2",
   "@smals-belgium-shared/vidis-prescription-detail": "3.5.2",
   "@smals-belgium-shared/vidis-prescription-list": "3.5.2",
-  "@smals-belgium/myhealth-wc-integration": "4.0.0"
+  "@smals-belgium/myhealth-wc-integration": "5.0.7"
 }
