@@ -1,7 +1,7 @@
 // Import JS
 import "@smals-belgium-shared/vidis-medication-scheme-list"
 // Import CSS
-import "@smals-belgium-shared/vidis-medication-scheme-list/medication-scheme-list.css"
+// import "@smals-belgium-shared/vidis-medication-scheme-list/medication-scheme-list.css"
 // TODO will be removed when VIDIS packages have built-in types (needed so I can review MAGS criteria)
 import type { MedicationSchemeList, Parameters } from "../@types/app";
 
