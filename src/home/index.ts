@@ -1,5 +1,5 @@
 import "./style.css";
-import { accessToken, idToken } from "@smals-belgium/myhealth-wc-integration";
+import type { AccessToken, IdToken } from "@smals-belgium/myhealth-wc-integration";
 import type { UserLanguage, ConfigName } from "@smals-belgium/myhealth-wc-integration";
 import type { Parameters, CommonSpecs } from "../@types/app.d.ts";
 
@@ -140,8 +140,12 @@ async function parseForm() {
                 addEventListener: () => { },
                 removeEventListener: () => { }
             },
-            getAccessToken: async () => accessToken(token || ""),
-            getIdToken: async () => idToken(token || ""),
+            getAccessToken: async () => {
+                return (token || "") as AccessToken;
+            },
+            getIdToken: async () => {
+                return Promise.reject("Not relevant for this")
+            },
             patchContactInfo: () => []
         },
         // Merge extra parameters
