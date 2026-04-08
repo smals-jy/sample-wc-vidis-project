@@ -12,18 +12,18 @@
   },
   "devDependencies": {
     "@smals-belgium/myhealth-wc-integration": "^5.0.7",
-    "typescript": "~5.9.3",
-    "vite": "^8.0.5",
+    "@types/node": "^25.3.5",
     "tsx": "^4.21.0",
-    "@types/node": "^25.3.5"
+    "typescript": "~5.9.3",
+    "vite": "^8.0.5"
   },
   "dependencies": {
-    "@smals-belgium-shared/vidis-delivered-medication-detail": "3.5.3-snapshot.4",
-    "@smals-belgium-shared/vidis-delivered-medication-list": "3.5.3-snapshot.4",
-    "@smals-belgium-shared/vidis-diarynote": "3.5.3-snapshot.4",
-    "@smals-belgium-shared/vidis-medication-scheme-detail": "3.5.3-snapshot.4",
-    "@smals-belgium-shared/vidis-medication-scheme-list": "3.5.3-snapshot.4",
-    "@smals-belgium-shared/vidis-prescription-detail": "3.5.3-snapshot.4",
-    "@smals-belgium-shared/vidis-prescription-list": "3.5.3-snapshot.4"
+    "@smals-belgium-shared/vidis-delivered-medication-detail": "^3.5.3-snapshot.5",
+    "@smals-belgium-shared/vidis-delivered-medication-list": "^3.5.3-snapshot.5",
+    "@smals-belgium-shared/vidis-diarynote": "^3.5.3-snapshot.5",
+    "@smals-belgium-shared/vidis-medication-scheme-detail": "^3.5.3-snapshot.5",
+    "@smals-belgium-shared/vidis-medication-scheme-list": "^3.5.3-snapshot.5",
+    "@smals-belgium-shared/vidis-prescription-detail": "^3.5.3-snapshot.5",
+    "@smals-belgium-shared/vidis-prescription-list": "^3.5.3-snapshot.5"
   }
 }
