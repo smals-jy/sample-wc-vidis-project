@@ -18,7 +18,7 @@
     "vite": "^8.0.12"
   },
   "dependencies": {
-    "@smals-belgium-shared/vidis-delivered-medication-detail": "^3.5.3-snapshot.5",
+    "@smals-belgium-shared/vidis-delivered-medication-detail": "^3.5.3-snapshot.6",
     "@smals-belgium-shared/vidis-delivered-medication-list": "^3.5.3-snapshot.5",
     "@smals-belgium-shared/vidis-diarynote": "^3.5.3-snapshot.5",
     "@smals-belgium-shared/vidis-medication-scheme-detail": "^3.5.3-snapshot.5",
