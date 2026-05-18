@@ -24,6 +24,6 @@
     "@smals-belgium-shared/vidis-medication-scheme-detail": "^3.5.3-snapshot.5",
     "@smals-belgium-shared/vidis-medication-scheme-list": "^3.5.3-snapshot.5",
     "@smals-belgium-shared/vidis-prescription-detail": "^3.5.3-snapshot.5",
-    "@smals-belgium-shared/vidis-prescription-list": "^3.5.3-snapshot.5"
+    "@smals-belgium-shared/vidis-prescription-list": "^3.5.3-snapshot.6"
   }
 }
