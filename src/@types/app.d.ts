@@ -21,6 +21,7 @@ export type Parameters = {
     language: `${UserLanguage}`;
     configName: `${ConfigName}`;
     services: HostServices;
+    authenticationStatus: "unauthenticated" | "online-authenticated" | "offline-authenticated";
     extraParams: {
         [x:string]: any
     }
