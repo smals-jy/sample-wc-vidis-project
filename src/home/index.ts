@@ -1,6 +1,6 @@
 import "./style.css";
-import type { AccessToken } from "@smals-belgium/myhealth-wc-integration";
-import type { UserLanguage, ConfigName } from "@smals-belgium/myhealth-wc-integration";
+import { ConfigName } from "@smals-belgium/myhealth-wc-integration";
+import type { AccessToken, UserLanguage } from "@smals-belgium/myhealth-wc-integration";
 import type { Parameters, CommonSpecs } from "../@types/app.d.ts";
 
 // Types
