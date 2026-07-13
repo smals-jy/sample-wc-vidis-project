@@ -12,6 +12,7 @@ class CommonSpecs extends HTMLElement {
     offlineDataStorageEnabled: boolean;
     isOfflineAuthenticated: boolean;
     ssin?: string;
+    authenticationStatus: "unauthenticated" | "online-authenticated" | "offline-authenticated";
 }
 
 class PrescriptionList extends CommonSpecs {}
