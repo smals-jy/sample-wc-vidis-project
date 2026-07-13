@@ -110,7 +110,7 @@ async function parseForm() {
 
     // Determine authentication status based on environment
     // Default to "online-authenticated", except for DEMO mode
-    const authenticationStatus = environment === "DEMO" ? "offline-authenticated" : "online-authenticated";
+    const authenticationStatus = environment === ConfigName.DEMO ? "offline-authenticated" : "online-authenticated";
     
     let token = prompt("Your VIDIS JWT token here");
     let extraParamsString = (document.getElementById("extraParams") as HTMLTextAreaElement).value;
