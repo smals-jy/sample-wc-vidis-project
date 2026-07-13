@@ -106,7 +106,12 @@ async function parseForm() {
     // Fields
     const component = (document.getElementById("component") as HTMLSelectElement).value as ComponentChoice;
     const language = (document.getElementById("language") as HTMLSelectElement).value as `${UserLanguage}`;
-    const environment = (document.getElementById("environment") as HTMLSelectElement).value as `${ConfigName}`;
+
+    // Read raw environment string from the select
+    const envRaw = (document.getElementById("environment") as HTMLSelectElement).value;
+
+    // Validate and coerce to ConfigName. If invalid, fallback to ConfigName.DEV
+    const environment = ((Object.values(ConfigName) as string[]).includes(envRaw) ? envRaw as ConfigName : ConfigName.DEV);
 
     // Determine authentication status based on environment
     // Default to "online-authenticated", except for DEMO mode
