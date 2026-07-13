@@ -107,6 +107,11 @@ async function parseForm() {
     const component = (document.getElementById("component") as HTMLSelectElement).value as ComponentChoice;
     const language = (document.getElementById("language") as HTMLSelectElement).value as `${UserLanguage}`;
     const environment = (document.getElementById("environment") as HTMLSelectElement).value as `${ConfigName}`;
+
+    // Determine authentication status based on environment
+    // Default to "online-authenticated", except for DEMO mode
+    const authenticationStatus = environment === "DEMO" ? "offline-authenticated" : "online-authenticated";
+    
     let token = prompt("Your VIDIS JWT token here");
     let extraParamsString = (document.getElementById("extraParams") as HTMLTextAreaElement).value;
 
@@ -129,6 +134,7 @@ async function parseForm() {
     let commonParams: Parameters = {
         configName: environment,
         language: language,
+        authenticationStatus: authenticationStatus,
         services: {
             cacheDataStorage: new Map<string, unknown>(),
             offlineDataStorage: {
