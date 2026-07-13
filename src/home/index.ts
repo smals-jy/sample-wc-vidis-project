@@ -17,7 +17,7 @@ const components: ComponentChoice[] = [
     "delivered-medication-detail"
 ];
 const languages = ["fr", "nl", "en", "de"];
-const environments = ["ACC", "PROD", "DEV"];
+const environments = ["ACC", "PROD", "DEMO", "DEV"];
 
 const app = document.getElementById("app") as HTMLDivElement;
 
