@@ -15,6 +15,7 @@ export default async function initModule(params : Parameters) {
     wc.language = params.language
     wc.configName = params.configName;
     wc.services = params.services;
+    wc.authenticationStatus = params.authenticationStatus;
     wc.professional = false;
     wc.offlineDataStorageEnabled = false;
     wc.isOfflineAuthenticated = false;
