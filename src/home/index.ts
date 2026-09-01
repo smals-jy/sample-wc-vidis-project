@@ -138,7 +138,7 @@ async function parseForm() {
     // Common params to all components
     let commonParams: Parameters = {
         configName: environment,
-        language: language,
+        userLanguage: language,
         authenticationStatus: authenticationStatus,
         services: {
             cacheDataStorage: new Map<string, unknown>(),
