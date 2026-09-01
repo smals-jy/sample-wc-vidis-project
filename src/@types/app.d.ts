@@ -5,7 +5,7 @@ import type {
 } from "@smals-belgium/myhealth-wc-integration";
 
 class CommonSpecs extends HTMLElement {
-    language: `${UserLanguage}`;
+    userLanguage: `${UserLanguage}`;
     configName: `${ConfigName}`;
     services: HostServices;
     professional: boolean;
@@ -13,6 +13,13 @@ class CommonSpecs extends HTMLElement {
     isOfflineAuthenticated: boolean;
     ssin?: string;
     authenticationStatus: "unauthenticated" | "online-authenticated" | "offline-authenticated";
+}
+
+export type OpenEventDetail = {
+    componentTag: string;
+    props?: {
+        [key: string]: unknown;
+    };
 }
 
 class PrescriptionList extends CommonSpecs {}
