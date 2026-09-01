@@ -2,6 +2,8 @@ import "./style.css";
 import { ConfigName } from "@smals-belgium/myhealth-wc-integration";
 import type { AccessToken, UserLanguage } from "@smals-belgium/myhealth-wc-integration";
 import type { Parameters, CommonSpecs } from "../@types/app.d.ts";
+import { getAuthenticationContext } from "../authentication-context";
+import { parseExtraParams } from "../extra-params";
 
 // Types
 type ComponentChoice = "prescriptions-list" | "prescriptions-detail" | "medication-scheme-list" | "medication-scheme-detail" | "diary-notes" | "delivered-medication-list" | "delivered-medication-detail";
@@ -56,9 +58,18 @@ function generateForm() {
     form.appendChild(createDropdown("Language", languages, "language"));
     form.appendChild(createDropdown("Environment", environments, "environment"));
 
+    const patientSsinDiv = document.createElement("div");
+    patientSsinDiv.innerHTML = `<label for="patientSsin">Patient SSIN:</label>`;
+    const patientSsinInput = document.createElement("input");
+    patientSsinInput.id = "patientSsin";
+    patientSsinInput.type = "text";
+    patientSsinInput.required = true;
+    patientSsinDiv.appendChild(patientSsinInput);
+    form.appendChild(patientSsinDiv);
+
     // Add input for extra parameters
     const extraParamsDiv = document.createElement("div");
-    extraParamsDiv.innerHTML = `<label for="extraParams">Extra Parameters (JS Object):</label>`;
+    extraParamsDiv.innerHTML = `<label for="extraParams">Extra Parameters (JSON Object):</label>`;
     const extraParamsInput = document.createElement("textarea");
     extraParamsInput.id = "extraParams";
     extraParamsInput.value = "{}"; // Default value
@@ -93,7 +104,7 @@ function generateForm() {
                 extraParamsTextArea.value = `{ "dguid": "123" }`;
                 break;
             case "medication-scheme-detail":
-                extraParamsTextArea.value = `{ "id": "123" }`;
+                extraParamsTextArea.value = `{ "id": "123", "date": "2026-01-01" }`;
                 break;
             default:
                 extraParamsTextArea.value = "{}";
@@ -106,6 +117,7 @@ async function parseForm() {
     // Fields
     const component = (document.getElementById("component") as HTMLSelectElement).value as ComponentChoice;
     const language = (document.getElementById("language") as HTMLSelectElement).value as `${UserLanguage}`;
+    const patientSsin = (document.getElementById("patientSsin") as HTMLInputElement).value;
 
     // Read raw environment string from the select
     const envRaw = (document.getElementById("environment") as HTMLSelectElement).value;
@@ -117,29 +129,29 @@ async function parseForm() {
     // Default to "online-authenticated", except for DEMO mode
     const authenticationStatus = environment === ConfigName.DEMO ? "offline-authenticated" : "online-authenticated";
     
-    let token = prompt("Your VIDIS JWT token here");
-    let extraParamsString = (document.getElementById("extraParams") as HTMLTextAreaElement).value;
+    const token = prompt("Your VIDIS JWT token here") || "";
+    const extraParamsString = (document.getElementById("extraParams") as HTMLTextAreaElement).value;
 
     // Parse extra parameters (with security considerations)
-    let extraParams: any = {};
+    let extraParams: Record<string, unknown>;
     try {
-        // Use a restricted sandbox-like approach.
-        extraParams = (new Function(`"use strict"; return (${extraParamsString})`))();
-        if (typeof extraParams !== 'object' || extraParams === null) {
-            extraParams = {}; // Reset if not an object.
-            console.warn("Extra parameters were not a valid object. Reset to empty object.");
-        }
-    } catch (error) {
-        console.error("Error parsing extra parameters:", error);
-        alert("Invalid extra parameters. Please enter a valid JavaScript object.");
-        extraParams = {}; // Reset on error
+        extraParams = parseExtraParams(extraParamsString);
+    } catch {
+        alert("Invalid extra parameters. Please enter a valid JSON object.");
+        return;
     }
+
+    const authenticationContext = getAuthenticationContext(token);
 
     // Common params to all components
     let commonParams: Parameters = {
         configName: environment,
         userLanguage: language,
         authenticationStatus: authenticationStatus,
+        patientSsin,
+        professional: authenticationContext.professional,
+        offlineDataStorageEnabled: false,
+        exchangeClientId: "sample-wc-vidis-project",
         services: {
             cacheDataStorage: new Map<string, unknown>(),
             offlineDataStorage: {
@@ -152,7 +164,7 @@ async function parseForm() {
                 removeEventListener: () => { }
             },
             getAccessToken: async () => {
-                return (token || "") as AccessToken;
+                return token as AccessToken;
             },
             getIdToken: async () => {
                 return Promise.reject("Not relevant for this")
@@ -164,8 +176,6 @@ async function parseForm() {
     };
 
     console.log(`Loading ${component}`);
-    console.log(commonParams);
-
     try {
         let wc: HTMLElement | null = null;
         let module : (params: Parameters) => Promise<CommonSpecs>;
