@@ -151,7 +151,7 @@ async function parseForm() {
         patientSsin,
         professional: authenticationContext.professional,
         offlineDataStorageEnabled: false,
-        exchangeClientId: "sample-wc-vidis-project",
+        exchangeClientId: "nihdi-vidis-webcomponent",
         services: {
             cacheDataStorage: new Map<string, unknown>(),
             offlineDataStorage: {
