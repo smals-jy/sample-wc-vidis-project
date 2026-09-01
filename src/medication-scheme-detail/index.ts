@@ -12,7 +12,7 @@ export default async function initModule(params : Parameters) {
 
     // Common inputs for all VIDIS web components
     // Refer to https://www.npmjs.com/package/@smals-belgium/myhealth-wc-integration for more details
-    wc.userLanguage = params.language
+    wc.userLanguage = params.userLanguage;
     wc.configName = params.configName;
     wc.services = params.services;
     wc.authenticationStatus = params.authenticationStatus;
