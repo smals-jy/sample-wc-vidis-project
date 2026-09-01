@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Target version (e.g., 3.5.3-snapshot.4)'
+        description: 'Target version (e.g., 4.2.2-snapshot.13)'
         required: true
-        default: '3.5.3-snapshot.4'
+        default: '4.2.2-snapshot.13'
         type: string
 
 jobs:
