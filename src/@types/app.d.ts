@@ -10,7 +10,6 @@ class CommonSpecs extends HTMLElement {
     services: HostServices;
     professional: boolean;
     offlineDataStorageEnabled: boolean;
-    isOfflineAuthenticated: boolean;
     ssin?: string;
     authenticationStatus: "unauthenticated" | "online-authenticated" | "offline-authenticated";
 }
@@ -25,10 +24,14 @@ export type OpenEventDetail = {
 class PrescriptionList extends CommonSpecs {}
 
 export type Parameters = {
-    language: `${UserLanguage}`;
+    userLanguage: `${UserLanguage}`;
     configName: `${ConfigName}`;
     services: HostServices;
     authenticationStatus: "unauthenticated" | "online-authenticated" | "offline-authenticated";
+    patientSsin: string;
+    professional: boolean;
+    offlineDataStorageEnabled: boolean;
+    exchangeClientId: string;
     extraParams: {
         [x:string]: any
     }
@@ -38,10 +41,15 @@ class PrescriptionDetails extends CommonSpecs {
     rid: string;
 }
 
-class MedicationSchemeList extends CommonSpecs {}
+class MedicationSchemeList extends CommonSpecs {
+    exchangeClientId: string;
+}
 
 class MedicationSchemeDetail extends CommonSpecs {
-    id: string
+    detail: {
+        id: string;
+        date?: string;
+    };
 }
 
 class DiaryNote extends CommonSpecs {}

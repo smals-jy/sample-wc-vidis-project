@@ -4,6 +4,7 @@ import "@smals-belgium-shared/vidis-prescription-list"
 // import "@smals-belgium-shared/vidis-prescription-list/prescription-list.css"
 // TODO will be removed when VIDIS packages have built-in types (needed so I can review MAGS criteria)
 import type { OpenEventDetail, PrescriptionList, Parameters } from "../@types/app";
+import { setCommonComponentInputs } from "../component-inputs";
 
 // To int the component
 export default async function initModule(params : Parameters) {
@@ -12,14 +13,7 @@ export default async function initModule(params : Parameters) {
 
     // Common inputs for all VIDIS web components
     // Refer to https://www.npmjs.com/package/@smals-belgium/myhealth-wc-integration for more details
-    wc.userLanguage = params.language
-    wc.configName = params.configName;
-    wc.services = params.services;
-    wc.authenticationStatus = params.authenticationStatus;
-    wc.professional = false;
-    wc.offlineDataStorageEnabled = false;
-    wc.isOfflineAuthenticated = false;
-    wc.ssin = "12987654321";
+    setCommonComponentInputs(wc, params);
 
     wc.addEventListener("open", ((event: CustomEvent<OpenEventDetail>) => {
         const { componentTag, props } = event.detail;

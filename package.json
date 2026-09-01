@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "generate:npm-versions": "npx tsx src/NpmVersionsFooter/extract-versions.ts",
+    "test": "node --import tsx --test src/*.test.ts",
     "prebuild": "npm run generate:npm-versions",
     "build": "tsc && vite build",
     "preview": "vite preview"
