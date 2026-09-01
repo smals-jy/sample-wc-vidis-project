@@ -4,6 +4,7 @@ import "@smals-belgium-shared/vidis-delivered-medication-detail"
 // import "@smals-belgium-shared/vidis-delivered-medication-detail/delivered-medication-detail.css"
 // TODO will be removed when VIDIS packages have built-in types (needed so I can review MAGS criteria)
 import type { DeliveredMedicationDetail, Parameters } from "../@types/app";
+import { setCommonComponentInputs } from "../component-inputs";
 
 // To int the component
 export default async function initModule(params : Parameters) {
@@ -12,14 +13,7 @@ export default async function initModule(params : Parameters) {
 
     // Common inputs for all VIDIS web components
     // Refer to https://www.npmjs.com/package/@smals-belgium/myhealth-wc-integration for more details
-    wc.userLanguage = params.userLanguage
-    wc.configName = params.configName;
-    wc.services = params.services;
-    wc.authenticationStatus = params.authenticationStatus;
-    wc.professional = false;
-    wc.offlineDataStorageEnabled = false;
-    wc.isOfflineAuthenticated = false;
-    wc.ssin = "12987654321";
+    setCommonComponentInputs(wc, params);
 
     // Specific input for this common
     // Here is a dummy place holder dguid, to check what happens when delivered medication doesn't exist anymore
