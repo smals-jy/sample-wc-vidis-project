@@ -25,7 +25,7 @@ export type OpenEventDetail = {
 class PrescriptionList extends CommonSpecs {}
 
 export type Parameters = {
-    language: `${UserLanguage}`;
+    userLanguage: `${UserLanguage}`;
     configName: `${ConfigName}`;
     services: HostServices;
     authenticationStatus: "unauthenticated" | "online-authenticated" | "offline-authenticated";
