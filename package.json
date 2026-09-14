@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@smals-belgium-shared/vidis-delivered-medication-detail": "^4.2.2-snapshot.14",
-    "@smals-belgium-shared/vidis-delivered-medication-list": "^4.2.2-snapshot.14",
+    "@smals-belgium-shared/vidis-delivered-medication-list": "^4.2.2",
     "@smals-belgium-shared/vidis-diarynote": "^4.2.2-snapshot.14",
     "@smals-belgium-shared/vidis-medication-scheme-detail": "^4.2.2-snapshot.14",
     "@smals-belgium-shared/vidis-medication-scheme-list": "^4.2.2-snapshot.14",
